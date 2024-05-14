@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', () => {
             const product = button.parentNode;
             const name = product.querySelector('h2').textContent;
-            const price = parseFloat(product.querySelector('.price').textContent.replace('R$ ', ''));
+            const price = parseFloat(product.querySelector('.price').textContent.replace('R$ ', '').replace(',', '.'));
             addToCart(name, price);
         });
     });
