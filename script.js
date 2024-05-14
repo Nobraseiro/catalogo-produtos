@@ -1,40 +1,51 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const cart = [];
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Catálogo de Produtos</h1>
+    </header>
 
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function() {
-            const productElement = this.closest('.product');
-            const productName = productElement.querySelector('h2').textContent;
-            const productPrice = parseFloat(productElement.querySelector('.price').textContent.replace('R$', '').replace(',', '.'));
+    <!-- Seção do carrinho -->
+    <section id="cart">
+        <h2>Carrinho de Compras</h2>
+        <ul id="cart-items"></ul>
+        <p id="total-price">Total: R$ 0,00</p>
+    </section>
 
-            const product = {
-                name: productName,
-                price: productPrice
-            };
+    <main>
+        <div class="product">
+            <img src="path/to/image1.jpg" alt="Descrição da imagem do produto 1">
+            <h2>Produto 1</h2>
+            <p>Descrição do produto 1.</p>
+            <p class="price">R$ 100,00</p>
+            <button class="add-to-cart">Adicionar ao Carrinho</button>
+        </div>
 
-            cart.push(product);
-            alert(`${productName} foi adicionado ao carrinho!`);
+        <!-- Produto 2 -->
+        <div class="product">
+            <img src="path/to/image2.jpg" alt="Descrição da imagem do produto 2">
+            <h2>Produto 2</h2>
+            <p>Descrição do produto 2.</p>
+            <p class="price">R$ 120,00</p>
+            <button class="add-to-cart">Adicionar ao Carrinho</button>
+        </div>
 
-            updateCart();
-        });
-    });
+        <!-- Produto 3 -->
+        <div class="product">
+            <img src="path/to/image3.jpg" alt="Descrição da imagem do produto 3">
+            <h2>Produto 3</h2>
+            <p>Descrição do produto 3.</p>
+            <p class="price">R$ 80,00</p>
+            <button class="add-to-cart">Adicionar ao Carrinho</button>
+        </div>
+    </main>
 
-    function updateCart() {
-        const cartItemsContainer = document.getElementById('cart-items');
-        const totalPriceElement = document.getElementById('total-price');
-
-        // Limpar itens anteriores
-        cartItemsContainer.innerHTML = '';
-
-        let total = 0;
-
-        cart.forEach(product => {
-            const li = document.createElement('li');
-            li.textContent = `${product.name} - R$ ${product.price.toFixed(2).replace('.', ',')}`;
-            cartItemsContainer.appendChild(li);
-            total += product.price;
-        });
-
-        totalPriceElement.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
-    }
-});
+    <script src="script.js"></script>
+</body>
+</html>
