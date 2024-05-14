@@ -1,33 +1,99 @@
-// Função para adicionar um item ao carrinho
-function addToCart(name, price) {
-    const cart = document.getElementById('cart-items');
-    const totalPrice = document.getElementById('total-price');
-
-    // Criar um novo item para o carrinho
-    const li = document.createElement('li');
-    li.textContent = `${name} - R$ ${price.toFixed(2)}`;
-
-    // Adicionar o item ao carrinho
-    cart.appendChild(li);
-
-    // Atualizar o preço total
-    let currentTotal = parseFloat(totalPrice.textContent.replace('Total: R$ ', ''));
-    if (isNaN(currentTotal)) {
-        currentTotal = 0;
-    }
-    const newTotal = currentTotal + price;
-    totalPrice.textContent = `Total: R$ ${newTotal.toFixed(2)}`;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    padding-bottom: 150px; /* Espaço para o carrinho fixo no fundo */
 }
 
-// Adicionar evento de clique para os botões "Adicionar ao Carrinho"
-document.addEventListener('DOMContentLoaded', function() {
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const product = button.parentNode;
-            const name = product.querySelector('h2').textContent;
-            const price = parseFloat(product.querySelector('.price').textContent.replace('R$ ', ''));
-            addToCart(name, price);
-        });
-    });
-});
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2em;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 1em;
+    padding: 1em;
+    width: 300px;
+    text-align: center;
+}
+
+.product img {
+    max-width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.add-to-cart {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart:hover {
+    background-color: #218838;
+}
+
+/* Estilos para o carrinho de compras */
+#cart {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 1em;
+    width: 300px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+}
+
+#cart h2 {
+    margin-top: 0;
+}
+
+#cart ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#cart ul li {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+#total-price {
+    font-size: 1.2em;
+    margin-top: 1em;
+}
