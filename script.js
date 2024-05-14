@@ -34,21 +34,4 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = product.querySelector('h2').textContent;
             const price = parseFloat(product.querySelector('.price').textContent.replace('R$ ', ''));
             addToCart(name, price);
-        });
-    });
-
-    // Mostrar/ocultar o menu do carrinho ao clicar no ícone do carrinho
-    const cartIcon = document.getElementById('cart-icon');
-    const cartDropdown = document.getElementById('cart-dropdown');
-
-    cartIcon.addEventListener('click', () => {
-        cartDropdown.classList.toggle('show');
-    });
-
-    // Fechar o menu do carrinho ao clicar fora dele
-    document.addEventListener('click', (event) => {
-        if (!cartIcon.contains(event.target) && !cartDropdown.contains(event.target)) {
-            cartDropdown.classList.remove('show');
-        }
-    });
-});
+       
