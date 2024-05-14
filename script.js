@@ -1,51 +1,28 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Produtos</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Catálogo de Produtos</h1>
-    </header>
+// Função para adicionar um item ao carrinho
+function addToCart(name, price) {
+    const cart = document.getElementById('cart-items');
+    const totalPrice = document.getElementById('total-price');
 
-    <!-- Seção do carrinho -->
-    <section id="cart">
-        <h2>Carrinho de Compras</h2>
-        <ul id="cart-items"></ul>
-        <p id="total-price">Total: R$ 0,00</p>
-    </section>
+    // Criar um novo item para o carrinho
+    const li = document.createElement('li');
+    li.textContent = `${name} - R$ ${price.toFixed(2)}`;
 
-    <main>
-        <div class="product">
-            <img src="path/to/image1.jpg" alt="Descrição da imagem do produto 1">
-            <h2>Produto 1</h2>
-            <p>Descrição do produto 1.</p>
-            <p class="price">R$ 100,00</p>
-            <button class="add-to-cart">Adicionar ao Carrinho</button>
-        </div>
+    // Adicionar o item ao carrinho
+    cart.appendChild(li);
 
-        <!-- Produto 2 -->
-        <div class="product">
-            <img src="path/to/image2.jpg" alt="Descrição da imagem do produto 2">
-            <h2>Produto 2</h2>
-            <p>Descrição do produto 2.</p>
-            <p class="price">R$ 120,00</p>
-            <button class="add-to-cart">Adicionar ao Carrinho</button>
-        </div>
+    // Atualizar o preço total
+    const currentTotal = parseFloat(totalPrice.textContent.replace('Total: R$ ', ''));
+    const newTotal = currentTotal + price;
+    totalPrice.textContent = `Total: R$ ${newTotal.toFixed(2)}`;
+}
 
-        <!-- Produto 3 -->
-        <div class="product">
-            <img src="path/to/image3.jpg" alt="Descrição da imagem do produto 3">
-            <h2>Produto 3</h2>
-            <p>Descrição do produto 3.</p>
-            <p class="price">R$ 80,00</p>
-            <button class="add-to-cart">Adicionar ao Carrinho</button>
-        </div>
-    </main>
-
-    <script src="script.js"></script>
-</body>
-</html>
+// Adicionar evento de clique para os botões "Adicionar ao Carrinho"
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const product = button.parentElement;
+        const name = product.querySelector('h2').textContent;
+        const price = parseFloat(product.querySelector('.price').textContent.replace('R$ ', ''));
+        addToCart(name, price);
+    });
+});
